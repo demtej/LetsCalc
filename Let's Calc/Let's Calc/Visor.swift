@@ -22,11 +22,15 @@ class Visor: UIView {
         self.historicLabel.text = ""
         self.historicLabel.textAlignment = .right
         self.historicLabel.font = UIFont.systemFont(ofSize:square , weight: UIFontWeightThin)
+        self.historicLabel.adjustsFontSizeToFitWidth = true
+        self.historicLabel.minimumScaleFactor = 0.2
         self.currentLabel = UILabel(frame: CGRect(x: 20, y: frame.size.height - square * 3 , width: frame.size.width - 40, height: square * 2.8 ))
         self.currentLabel.textColor = UIColor.lightTextTKColor()
         self.currentLabel.text = EMPTY_CURRENT_SYMBOL
         self.currentLabel.textAlignment = .right
         self.currentLabel.font = UIFont.systemFont(ofSize:square * 2 , weight: UIFontWeightLight)
+        self.currentLabel.adjustsFontSizeToFitWidth = true
+        self.currentLabel.minimumScaleFactor = 0.2
         super.init(frame: frame)
         self.backgroundColor = UIColor.darkTKColor()
         self.addSubview(self.historicLabel)

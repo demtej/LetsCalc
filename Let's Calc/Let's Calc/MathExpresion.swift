@@ -20,7 +20,17 @@ class MathExpresion: NSObject {
             if !finished {
                 return ""
             }else{
-                return (self.stringRepresentation.mathExpresionResult() + " ").replacingOccurrences(of: ".0 ", with: " ")
+                var stringRep = ""
+                var index = 0
+                for term in terms {
+                    stringRep.append(term.stringRepresentation)
+                    if operators.count > index {
+                        stringRep.append(" " + operators[index].rawValue + " ")
+                    }
+                    index = index + 1
+                }
+
+                return (stringRep.mathExpresionResult() + " ").replacingOccurrences(of: ".0 ", with: " ")
             }
         }
     }
