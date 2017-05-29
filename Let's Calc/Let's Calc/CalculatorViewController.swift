@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController  {
+class CalculatorViewController: UIViewController, CalculatorKeyboardListener {
 
     var viewModel : CalculatorViewModel!
     var keyboard : CalculatorKeyboard!
@@ -23,7 +23,7 @@ class CalculatorViewController: UIViewController  {
         let visorFrame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: yOrigin.rounded())
         self.keyboard = CalculatorKeyboard(frame: keyboardFrame)
         self.visor = Visor(frame: visorFrame)
-        self.keyboard.delegate = self.viewModel
+        self.keyboard.delegate = self
         self.view.addSubview(self.keyboard)
         self.view.addSubview(self.visor)
         self.view.backgroundColor = UIColor.darkGray
@@ -36,5 +36,9 @@ class CalculatorViewController: UIViewController  {
     
     func updateViews(){
         self.visor.updateViewsWith(mathExpresion: self.viewModel.currentMathExpresion, currentInput: self.viewModel.currentInput)
+    }
+    
+    func pressButton(button : CalculatorButton) {
+        self.viewModel.doAction(button.actionType, operatorValue: button.operatorValue, digit: button.symbol)
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CalculatorViewModel : CalculatorKeyboardListener {
+class CalculatorViewModel : NSObject {
     var mathExpresions = [MathExpresion]()
     var currentMathExpresion : MathExpresion?
     weak var viewController : CalculatorViewController?
@@ -19,10 +19,10 @@ class CalculatorViewModel : CalculatorKeyboardListener {
         self.currentInput = ""
     }
     
-    func pressButton(button : CalculatorButton) {
+    func doAction(_ action: Action, operatorValue : Operator?, digit : String? ) {
         if let currentExpresion = self.currentMathExpresion {
             if currentExpresion.finished {
-                if let op = button.operatorValue , let doubleValue = self.currentMathExpresion?.result.toDouble() {
+                if let op = operatorValue , let doubleValue = self.currentMathExpresion?.result.toDouble() {
                     self.currentMathExpresion = nil
                     appendToCurrentExpresion(term: Term(doubleValue: doubleValue), op: op)
                     guard let controller = viewController else {
@@ -35,11 +35,14 @@ class CalculatorViewModel : CalculatorKeyboardListener {
                 }
             }
         }
-        switch button.actionType {
+        switch action {
         case Action.NUMBER:
-            self.currentInput.append(button.symbol)
+            guard let digit = digit else {
+                return
+            }
+            self.currentInput.append(digit)
         case Action.MINUS,Action.PLUS,Action.INTO,Action.TIMES:
-            guard let op = button.operatorValue , let doubleValue = self.currentInput.toDouble() else{
+            guard let op = operatorValue , let doubleValue = self.currentInput.toDouble() else{
                 return
             }
             appendToCurrentExpresion(term: Term(doubleValue: doubleValue), op: op)
@@ -49,8 +52,11 @@ class CalculatorViewModel : CalculatorKeyboardListener {
             self.currentInput = ""
             self.currentMathExpresion = nil
         case Action.DOT:
-            if !self.currentInput.contains(button.symbol){
-                self.currentInput.append(button.symbol)
+            guard let digit = digit else {
+                return
+            }
+            if !self.currentInput.contains(digit){
+                self.currentInput.append(digit)
             }
         case Action.PERCENT:
             guard let doubleValue = Double(self.currentInput) else{
