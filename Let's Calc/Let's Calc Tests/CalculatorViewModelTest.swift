@@ -14,17 +14,26 @@ class CalculatorViewModelTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        self.viewModel = CalculatorViewModel(viewController: CalculatorViewController())
+        self.viewModel = CalculatorViewModel(viewController: nil)
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testMathExpresion() {
+       self.viewModel.doAction(Action.NUMBER, operatorValue: nil, digit: "1")
+        XCTAssertEqual("1", self.viewModel.currentInput)
+        self.viewModel.doAction(Action.NUMBER, operatorValue: nil, digit: "2")
+        XCTAssertEqual("12", self.viewModel.currentInput)
+        self.viewModel.doAction(Action.NUMBER, operatorValue: nil, digit: "3")
+        XCTAssertEqual("123", self.viewModel.currentInput)
+        self.viewModel.doAction(Action.NUMBER, operatorValue: nil, digit: "4")
+        XCTAssertEqual("1234", self.viewModel.currentInput)
+        self.viewModel.doAction(Action.NUMBER, operatorValue: nil, digit: "5")
+        XCTAssertEqual("12345", self.viewModel.currentInput)
+
+        
     }
     
 

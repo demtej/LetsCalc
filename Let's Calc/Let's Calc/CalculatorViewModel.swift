@@ -14,7 +14,7 @@ class CalculatorViewModel : NSObject {
     weak var viewController : CalculatorViewController?
     var currentInput : String
     
-    init(viewController : CalculatorViewController) {
+    init(viewController : CalculatorViewController?) {
         self.viewController = viewController
         self.currentInput = ""
     }
