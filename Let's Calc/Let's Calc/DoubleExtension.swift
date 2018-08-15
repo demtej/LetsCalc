@@ -1,6 +1,6 @@
 //
 //  DoubleExtension.swift
-//  iToolkit
+//  Let's Calc
 //
 //  Created by Demian Tejo on 5/23/17.
 //  Copyright © 2017 Demian Tejo. All rights reserved.

@@ -29,7 +29,6 @@ class MathExpresion: NSObject {
                     }
                     index = index + 1
                 }
-
                 return (stringRep.mathExpresionResult() + " ").replacingOccurrences(of: ".0 ", with: " ")
             }
         }

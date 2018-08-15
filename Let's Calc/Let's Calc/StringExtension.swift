@@ -1,6 +1,6 @@
 //
 //  StringExtension.swift
-//  iToolkit
+//  Let's Calc
 //
 //  Created by Demian Tejo on 5/25/17.
 //  Copyright © 2017 Demian Tejo. All rights reserved.
@@ -11,7 +11,9 @@ import Foundation
 
 extension String {
     func toDouble() -> Double? {
-        return NumberFormatter().number(from: self)?.doubleValue
+        let formatter = NumberFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        return formatter.number(from: self)?.doubleValue
     }
     
     func mathExpresionResult()-> String{

@@ -72,6 +72,7 @@ class CalculatorViewModel : NSObject {
             guard let doubleValue = self.currentInput.toDouble() , let expresion = self.currentMathExpresion else{
                 return
             }
+
             expresion.add(term: Term(doubleValue: doubleValue))
             self.mathExpresions.append(expresion)
             
