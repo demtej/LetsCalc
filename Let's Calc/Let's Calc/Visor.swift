@@ -23,7 +23,8 @@ class Visor: UIView {
         self.historicLabel.textAlignment = .right
         self.historicLabel.font = UIFont.systemFont(ofSize:square , weight: UIFontWeightThin)
         self.historicLabel.adjustsFontSizeToFitWidth = true
-        self.historicLabel.minimumScaleFactor = 0.2
+        self.historicLabel.minimumScaleFactor = 0.8
+        
         self.currentLabel = UILabel(frame: CGRect(x: 20, y: frame.size.height - square * 3 , width: frame.size.width - 40, height: square * 2.8 ))
         self.currentLabel.textColor = UIColor.lightTextTKColor()
         self.currentLabel.text = EMPTY_CURRENT_SYMBOL

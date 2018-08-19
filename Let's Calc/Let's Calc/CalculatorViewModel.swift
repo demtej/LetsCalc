@@ -40,6 +40,17 @@ class CalculatorViewModel : NSObject {
             guard let digit = digit else {
                 return
             }
+            if let input = self.currentInput.toDouble() {
+                if input >= 100000000{
+                    return
+                }
+            }
+            if let currentExpresion = self.currentMathExpresion  {
+                if currentExpresion.finished {
+                    self.currentInput = ""
+                    self.currentMathExpresion = nil
+                }
+            }
             self.currentInput.append(digit)
         case Action.MINUS,Action.PLUS,Action.INTO,Action.TIMES:
             guard let op = operatorValue , let doubleValue = self.currentInput.toDouble() else{
