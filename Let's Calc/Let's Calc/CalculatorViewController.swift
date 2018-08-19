@@ -17,7 +17,8 @@ class CalculatorViewController: UIViewController, CalculatorKeyboardListener {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModel = CalculatorViewModel(viewController : self)
-        self.view.backgroundColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+        self.view.backgroundColor = UIColor.darkTKColor()
+        self.view.layoutIfNeeded()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -31,7 +32,6 @@ class CalculatorViewController: UIViewController, CalculatorKeyboardListener {
         self.keyboard.delegate = self
         self.view.addSubview(self.keyboard)
         self.view.addSubview(self.visor)
-        self.view.backgroundColor = UIColor.darkGray
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
