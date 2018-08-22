@@ -36,7 +36,7 @@ class CalculatorKeyboard: UIView {
         while y < self.frame.size.height {
             var i : CGFloat = 0.0
             while i < 4 {
-                let button = CalculatorButton(frame: CGRect(x: elementWidth * i, y: y, width: elementWidth, height: elementHeight), especifications:calculatorKeys[elementNumber], color: UIColor.fromHex("3D385B"))
+                let button = CalculatorButton(frame: CGRect(x: elementWidth * i, y: y, width: elementWidth, height: elementHeight), especifications:calculatorKeys[elementNumber], color: UIColor.elementButton())
                 button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
                 elementNumber = elementNumber + 1
                 self.addSubview(button)

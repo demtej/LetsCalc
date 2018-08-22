@@ -1,6 +1,5 @@
 //
 //  CalculatorViewController.swift
-//  iToolkit
 //
 //  Created by Demian Tejo on 5/17/17.
 //  Copyright © 2017 Demian Tejo. All rights reserved.
@@ -32,15 +31,77 @@ class CalculatorViewController: UIViewController, CalculatorKeyboardListener {
         self.keyboard.delegate = self
         self.view.addSubview(self.keyboard)
         self.view.addSubview(self.visor)
+        
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     func updateViews(){
-        self.visor.updateViewsWith(mathExpresion: self.viewModel.currentMathExpresion, currentInput: self.viewModel.currentInput)
+        var historicInput = ""
+        if let mathExpresion = self.viewModel.currentMathExpresion {
+            historicInput = mathExpresion.stringRepresentation
+            if mathExpresion.finished {
+                historicInput.append(" = ")
+                if let doubleResult = mathExpresion.result.toDouble() {
+                    if abs(doubleResult) > 0.00001 {
+                        self.viewModel.currentInput = mathExpresion.result
+                    }else{
+                        self.viewModel.currentInput = "0"
+                    }
+                }else {
+                    self.viewModel.currentInput = "✕"
+                }
+            }else{
+                if let doubleResult = self.viewModel.currentInput.toDouble() {
+                    if abs(doubleResult) > 0.00001 {
+                    }else{
+                        self.viewModel.currentInput = "0"
+                    }
+                }
+            }
+        }else{
+            if let doubleResult = self.viewModel.currentInput.toDouble() {
+                if abs(doubleResult) > 0.00001 {
+                }else{
+                    self.viewModel.currentInput = "0"
+                }
+            }else{
+            }
+        }
+        self.visor.updateViewsWith2(historicInput: historicInput, currentInput: self.viewModel.currentInput)
     }
     
+    /*
+     func updateViews(){
+     var historicInput = ""
+     if let mathExpresion = self.viewModel.currentMathExpresion {
+     historicInput = mathExpresion.stringRepresentation
+     if mathExpresion.finished {
+     historicInput.append(" = ")
+     if let doubleResult = mathExpresion.result.toDouble() {
+     if abs(doubleResult) > 0.00001 {
+     self.viewModel.currentInput = mathExpresion.result
+     }else{
+     self.viewModel.currentInput = "0"
+     }
+     }else {
+     self.viewModel.currentInput = "✕"
+     }
+     }else{
+     }
+     }else{
+     if let doubleResult = self.viewModel.currentInput.toDouble() {
+     if abs(doubleResult) > 0.00001 {
+     }else{
+     self.viewModel.currentInput = "0"
+     }
+     }else{
+     }
+     }
+     self.visor.updateViewsWith2(historicInput: historicInput, currentInput: self.viewModel.currentInput)
+     }
+     */
     func pressButton(button : CalculatorButton) {
         self.viewModel.doAction(button.actionType, operatorValue: button.operatorValue, digit: button.symbol)
     }

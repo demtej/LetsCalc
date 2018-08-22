@@ -51,25 +51,38 @@ class CalculatorButton: UIButton {
     func makeView(){
         self.backgroundColor = self.color
         self.label.text = self.symbol
-        self.label.font = UIFont.systemFont(ofSize: self.frame.size.height * 0.45, weight: UIFontWeightThin)
-        self.label.textColor = UIColor.darkTextTKColor()
+        self.label.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightMedium)
+        if actionType == .NUMBER {
+            self.label.textColor = UIColor.ultraLightTextTKColor()
+        }else{
+            self.label.textColor = UIColor.lightTextTKColor()
+        }
+
         self.label.textAlignment = .center
         self.addTarget(self, action: #selector(touch), for: .touchDown)
         self.addTarget(self, action: #selector(up), for: .touchDragOutside)
         self.addTarget(self, action: #selector(up), for: .touchUpInside)
         self.addSubview(label)
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.lightBorderTKColor().cgColor
+       // self.layer.borderWidth = 0.5
+       // self.layer.borderColor = UIColor.lightBorderTKColor().cgColor
+        let border = CALayer()
+        border.backgroundColor = UIColor.lightBorderTKColor().cgColor
+        border.frame = CGRect(x: 0.0, y: 0.0, width: self.frame.size.width, height:1)
+        self.layer.addSublayer(border)
         
     }
     
     func touch() {
-            self.backgroundColor = self.color.darker()
+            self.backgroundColor = UIColor.darkTKColor()
             self.label.textColor = UIColor.lightTextTKColor()
     }
     func up() {
-            self.backgroundColor = self.color
-        self.label.textColor = UIColor.darkTextTKColor()
+        self.backgroundColor = self.color
+        if actionType == .NUMBER {
+            self.label.textColor = UIColor.ultraLightTextTKColor()
+        }else{
+            self.label.textColor = UIColor.lightTextTKColor()
+        }
     }
 }
 

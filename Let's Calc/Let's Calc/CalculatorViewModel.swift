@@ -41,7 +41,7 @@ class CalculatorViewModel : NSObject {
                 return
             }
             if let input = self.currentInput.toDouble() {
-                if input >= 100000000{
+                if String(input).characters.count >= 9 {
                     return
                 }
             }

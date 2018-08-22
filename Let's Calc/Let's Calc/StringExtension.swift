@@ -23,9 +23,8 @@ extension String {
         mathExpresion = mathExpresion.replacingOccurrences(of: "=", with: "")
         let expression = NSExpression(format: mathExpresion)
         let result = expression.expressionValue(with: nil, context: nil) as! Double
-        if result > 100000000 {
-            return "ERROR"
-                //String(describing: result.roundTo(places: 2).scientificStyle)
+        if abs(result) > 100000000 {
+            return "✕ Limit exceeded"
         }else{
             if String(describing: result).contains("."){
                 return String(describing: result.roundTo(places: 2))

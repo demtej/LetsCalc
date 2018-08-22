@@ -51,18 +51,29 @@ extension UIColor {
     }
     
     class public func darkTKColor() -> UIColor{
-        return UIColor.fromHex("582A40")
+        return UIColor.fromHex("1D242F")
+            //UIColor.fromHex("582A40")
     }
     class public func darkTextTKColor() -> UIColor{
         return UIColor.white
     }
+    class public func ultraLightTextTKColor() -> UIColor{
+        return UIColor.white.withAlphaComponent(0.8)
+            //UIColor.fromHex("94637F")
+    }
     class public func lightTextTKColor() -> UIColor{
-         return UIColor.fromHex("94637F")
+        return UIColor.white.withAlphaComponent(0.6)
+        //UIColor.fromHex("94637F")
     }
     class public func lightBorderTKColor() -> UIColor{
-        return UIColor.fromHex("94637F")
+        return UIColor.fromHex("1D242F")
+            //UIColor.fromHex("94637F")
     }
     
+    class public func elementButton() -> UIColor{
+        return  UIColor.fromHex("212937")
+    }
+
     convenience init(netHex: Int) {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
