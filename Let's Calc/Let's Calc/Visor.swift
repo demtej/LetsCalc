@@ -13,7 +13,7 @@ class Visor: UIView {
     var historicLabel : UILabel
     var currentLabel : UILabel
     var newCalc = false
-    let EMPTY_CURRENT_SYMBOL = "0"
+    let EMPTY_CURRENT_SYMBOL = ""
     
     override init(frame: CGRect) {
         let square = (frame.size.height / 7).rounded()
@@ -41,37 +41,8 @@ class Visor: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func updateViewsWith(mathExpresion:MathExpresion?, currentInput:String?){
-        self.clear()
-        if let mathExpresion = mathExpresion {
-            self.historicLabel.text = mathExpresion.stringRepresentation
-            if mathExpresion.finished {
-                self.historicLabel.text?.append(" = ")
-                if let doubleResult = mathExpresion.result.toDouble() {
-                    if doubleResult > 0.00001 {
-                        self.currentLabel.text = mathExpresion.result
-                    }else{
-                        self.currentLabel.text = "0"
-                    }
-                }else {
-                    self.currentLabel.text = "✕"
-                }
-            }else{
-                self.currentLabel.text = currentInput
-            }
-        }else{
-            if let doubleResult = currentInput?.toDouble() {
-                if doubleResult > 0.00001 {
-                    self.currentLabel.text = "0"
-                }
-                self.currentLabel.text = currentInput
-            }else{
-                self.currentLabel.text = currentInput
-            }
-        }
-    }
-    func updateViewsWith2(historicInput:String, currentInput:String){
+
+    func updateViewsWith(historicInput:String, currentInput:String){
         self.clear()
         self.historicLabel.text = historicInput
         self.currentLabel.text = currentInput
