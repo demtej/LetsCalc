@@ -31,6 +31,9 @@ class CalculatorViewController: UIViewController, CalculatorKeyboardListener {
         self.keyboard.delegate = self
         self.view.addSubview(self.keyboard)
         self.view.addSubview(self.visor)
+        let phantomView = UIView(frame: CGRect(x: 0, y: self.view.frame.size.height - PXLayout.getSafeAreaBottomInset(), width: self.view.frame.size.width, height: PXLayout.getSafeAreaBottomInset()))
+        phantomView.backgroundColor = UIColor.elementButton()
+        self.view.addSubview(phantomView)
         
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
