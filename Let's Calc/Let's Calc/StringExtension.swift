@@ -13,7 +13,9 @@ extension String {
     func toDouble() -> Double? {
         let formatter = NumberFormatter()
         formatter.locale = Locale(identifier: "en_US")
-        return formatter.number(from: self)?.doubleValue
+        let decimalSeparator = Locale(identifier: "en_US").decimalSeparator
+        let newString = self.replacingOccurrences(of: Locale.current.decimalSeparator!, with: decimalSeparator!)
+        return formatter.number(from: newString)?.doubleValue
     }
     
     func localizedAmount() -> String {

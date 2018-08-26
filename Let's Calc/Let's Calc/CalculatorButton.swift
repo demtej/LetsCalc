@@ -33,7 +33,11 @@ class CalculatorButton: UIButton {
     }
     
     init(frame: CGRect, especifications:(String,Action), color : UIColor) {
-        self.symbol = especifications.0
+        if especifications.0 == "." {
+            self.symbol = Locale.current.decimalSeparator!
+        }else {
+            self.symbol = especifications.0
+        }
         self.actionType = especifications.1
         self.color = color
         let marginX = frame.width * MARGIN_RATE
