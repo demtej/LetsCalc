@@ -43,7 +43,7 @@ class CalculatorViewController: UIViewController, CalculatorKeyboardListener {
     func updateViews(){
         var historicInput = ""
         if let mathExpresion = self.viewModel.currentMathExpresion {
-            historicInput = mathExpresion.stringRepresentation
+            historicInput = mathExpresion.stringLocalizedRepresentation
             if mathExpresion.finished {
                 historicInput.append(" = ")
                 if let doubleResult = mathExpresion.result.toDouble() {
