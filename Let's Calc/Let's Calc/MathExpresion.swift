@@ -51,6 +51,28 @@ class MathExpresion: NSObject {
             return stringRep
         }
     }
+    var stringLocalizedRepresentation: String {
+        get {
+            var stringRep = ""
+            var index = 0
+            for term in terms {
+                stringRep.append(term.stringLocalizedRepresentation)
+                if operators.count > index {
+                    stringRep.append(" " + operators[index].rawValue + " ")
+                }
+                index = index + 1
+            }
+            var decimalSeparator = ""
+            if let separator = Locale.current.decimalSeparator {
+                decimalSeparator = separator
+            }
+            stringRep.append(" ")
+            stringRep = stringRep.replacingOccurrences(of: decimalSeparator + "0 ", with: " ")
+            stringRep = stringRep.replacingOccurrences(of: decimalSeparator + "0)", with: ")")
+            stringRep.characters = stringRep.characters.dropLast()
+            return stringRep
+        }
+    }
     var stringRepresentationWithResult: String {
         get {
             if !finished {
@@ -115,6 +137,15 @@ class Term : NSObject {
                 return "(- " + String(doubleValue) + ")"
             }else{
                 return String(doubleValue)
+            }
+        }
+    }
+    var stringLocalizedRepresentation : String {
+        get {
+            if (negative){
+                return "(- " + String(doubleValue).localizedAmount() + ")"
+            }else{
+                return String(doubleValue).localizedAmount()
             }
         }
     }

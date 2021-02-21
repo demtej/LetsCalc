@@ -13,7 +13,30 @@ extension String {
     func toDouble() -> Double? {
         let formatter = NumberFormatter()
         formatter.locale = Locale(identifier: "en_US")
-        return formatter.number(from: self)?.doubleValue
+        let decimalSeparator = Locale(identifier: "en_US").decimalSeparator
+        let newString = self.replacingOccurrences(of: Locale.current.decimalSeparator!, with: decimalSeparator!)
+        return formatter.number(from: newString)?.doubleValue
+    }
+    
+    func localizedAmount() -> String {
+        let usLocale = Locale(identifier: "en_US")
+        let usDecimalSeparator = usLocale.decimalSeparator!
+        let usGroupingSeparator = usLocale.groupingSeparator!
+        let formatter = NumberFormatter()
+        formatter.locale = usLocale
+        formatter.numberStyle = NumberFormatter.Style.decimal
+        formatter.usesGroupingSeparator = true
+        guard let number = self.toDouble() else{
+            return self
+        }
+        guard let result = formatter.string(from: number as NSNumber) else {
+            return self
+        }
+        guard let decimalSeparator = Locale.current.decimalSeparator , let groupingSeparator = Locale.current.groupingSeparator else {
+            return result
+        }
+        
+        return result.replacingOccurrences(of: usDecimalSeparator, with: "@").replacingOccurrences(of: usGroupingSeparator, with: groupingSeparator).replacingOccurrences(of: "@", with: decimalSeparator)
     }
     
     func mathExpresionResult()-> String{

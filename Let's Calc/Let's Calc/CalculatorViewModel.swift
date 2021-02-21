@@ -13,7 +13,7 @@ class CalculatorViewModel : NSObject {
     var currentMathExpresion : MathExpresion?
     weak var viewController : CalculatorViewController?
     var currentInput : String
-    
+    let MAX_CHAR = 11
     init(viewController : CalculatorViewController?) {
         self.viewController = viewController
         self.currentInput = ""
@@ -41,7 +41,7 @@ class CalculatorViewModel : NSObject {
                 return
             }
             if let input = self.currentInput.toDouble() {
-                if String(input).characters.count >= 9 {
+                if String(input).characters.count >= MAX_CHAR {
                     return
                 }
             }

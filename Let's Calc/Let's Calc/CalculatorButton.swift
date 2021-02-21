@@ -33,7 +33,11 @@ class CalculatorButton: UIButton {
     }
     
     init(frame: CGRect, especifications:(String,Action), color : UIColor) {
-        self.symbol = especifications.0
+        if especifications.0 == "." {
+            self.symbol = Locale.current.decimalSeparator!
+        }else {
+            self.symbol = especifications.0
+        }
         self.actionType = especifications.1
         self.color = color
         let marginX = frame.width * MARGIN_RATE
@@ -63,8 +67,6 @@ class CalculatorButton: UIButton {
         self.addTarget(self, action: #selector(up), for: .touchDragOutside)
         self.addTarget(self, action: #selector(up), for: .touchUpInside)
         self.addSubview(label)
-       // self.layer.borderWidth = 0.5
-       // self.layer.borderColor = UIColor.lightBorderTKColor().cgColor
         let border = CALayer()
         border.backgroundColor = UIColor.lightBorderTKColor().cgColor
         border.frame = CGRect(x: 0.0, y: self.frame.size.height - 1, width: self.frame.size.width, height:1)

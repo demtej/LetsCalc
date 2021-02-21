@@ -44,8 +44,8 @@ class Visor: UIView {
 
     func updateViewsWith(historicInput:String, currentInput:String){
         self.clear()
-        self.historicLabel.text = historicInput
-        self.currentLabel.text = currentInput
+        self.historicLabel.text = historicInput.localizedAmount()
+        self.currentLabel.text = currentInput.localizedAmount()
     }
     
     func clearHistoric(){
